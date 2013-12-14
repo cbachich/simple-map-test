@@ -1,4 +1,6 @@
 var map;
+var home_lat  = 40.0;
+var home_long = -100.0;
 
 function mapInit() {
   map = L.mapbox.map('map', 'examples.map-9ijuk24y')
@@ -6,8 +8,6 @@ function mapInit() {
 
   map.addControl(L.mapbox.geocoderControl('examples.map-9ijuk24y'));
   map.addControl(L.mapbox.shareControl());
-
-
 }
 
 function addr_search() {
