@@ -13,6 +13,7 @@ function mapInit() {
 function addr_search() {
   var inp = document.getElementById("addr");
 
+  console.log(inp.value);
   $.getJSON('http://nominatim.openstreetmap.org/search?format=json&limit=5&q=' + inp.value, function(data) {
     var items = [];
 
@@ -34,6 +35,11 @@ function addr_search() {
       $('<p>', { html: "No results found" }).appendTo('#results');
     }
   });
+
+  var className = document.getElementById("results").className;
+  if (className != "visible") {
+    document.getElementById("results").className = "visible";
+  }
 }
 
 function chooseAddr(lat, lng, type) {
@@ -68,4 +74,5 @@ function chooseAddr(lat, lng, type) {
   ];
 
   map.markerLayer.setGeoJSON(geojson);
+  document.getElementById("results").className = "invisible";
 }

@@ -11,9 +11,8 @@
   <body onload="mapInit()">
     <div id='map'></div>
     <div id="search">
-      <input type="text" name="addr" value="" id="addr" size="10" />
-      <button type="button" onclick="addr_search();">Search</button>
-      <div id="results"/>
+      <input type="text" name="addr" id="addr" onkeyup="addr_search();"/>
+      <div id="results" />
     </div>
   </body>
 </html>
