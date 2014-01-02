@@ -1,6 +1,7 @@
 var map;
 var home_lat  = 40.0;
 var home_long = -100.0;
+var timeout;
 
 function mapInit() {
   map = L.mapbox.map('map', 'examples.map-9ijuk24y')
@@ -8,6 +9,22 @@ function mapInit() {
 
   map.addControl(L.mapbox.geocoderControl('examples.map-9ijuk24y'));
   map.addControl(L.mapbox.shareControl());
+  timeout = 0;
+  setInterval(timer, 200);
+}
+
+function change() {
+  timeout = 2;
+}
+
+function timer() {
+  if (timeout == 1) {
+    addr_search();
+  }
+
+  if (timeout > 0) {
+    timeout--;
+  }
 }
 
 function addr_search() {
