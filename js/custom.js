@@ -2,6 +2,7 @@ var map;
 var home_lat  = 40.0;
 var home_long = -100.0;
 var timeout;
+var bb;
 
 function mapInit() {
   map = L.mapbox.map('map', 'examples.map-9ijuk24y')
@@ -11,6 +12,8 @@ function mapInit() {
   map.addControl(L.mapbox.shareControl());
   timeout = 0;
   setInterval(timer, 200);
+  bb = "";
+  getLocation();
 }
 
 function change() {
@@ -30,8 +33,8 @@ function timer() {
 function addr_search() {
   var inp = document.getElementById("addr");
 
-  console.log(inp.value);
-  $.getJSON('http://nominatim.openstreetmap.org/search?format=json&limit=5&q=' + inp.value, function(data) {
+  var searchString = 'http://nominatim.openstreetmap.org/search?format=json&limit=5' + bb + '&q=' + inp.value;
+  $.getJSON(searchString, function(data) {
     var items = [];
 
     $.each(data, function(key, val) {
@@ -57,6 +60,18 @@ function addr_search() {
   if (className != "visible") {
     document.getElementById("results").className = "visible";
   }
+}
+
+function getLocation() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(setLocation);
+  }
+}
+
+function setLocation(position) {
+  var x = position.coords.latitude;
+  var y = position.coords.longitude;
+  bb = "&viewbox=" + (y-1) + "," + (x+1) + "," + (y+1) + "," + (x-1);
 }
 
 function chooseAddr(lat, lng, type) {
