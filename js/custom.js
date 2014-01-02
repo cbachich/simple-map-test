@@ -11,7 +11,7 @@ function mapInit() {
   map.addControl(L.mapbox.geocoderControl('examples.map-9ijuk24y'));
   map.addControl(L.mapbox.shareControl());
   timeout = 0;
-  setInterval(timer, 200);
+  setInterval(timer, 250);
   bb = "";
   getLocation();
 }
@@ -30,35 +30,54 @@ function timer() {
   }
 }
 
+var items;
+var results;
 function addr_search() {
   var inp = document.getElementById("addr");
 
-  var searchString = 'http://nominatim.openstreetmap.org/search?format=json&limit=5' + bb + '&q=' + inp.value;
-  $.getJSON(searchString, function(data) {
-    var items = [];
+  items = [];
+  results = [];
+  var searchString = 'http://nominatim.openstreetmap.org/search?format=json&q=' + inp.value;
+  getSearchResults(searchString + bb + "&limit=5&bounded=1");
+  getSearchResults(searchString + "&limit=5");
 
-    $.each(data, function(key, val) {
-      items.push(
-        "<li><a href='#' onclick='chooseAddr(" +
-        val.lat + ", " + val.lon + ", \"" + val.type + "\");return false;'>" + val.display_name +
-        '</a></li>'
-      );
-    });
-    $('#results').empty();
-    if (items.length != 0) {
-      $('<p>', { html: "Search results:" }).appendTo('#results');
-      $('<ul/>', {
-        'class': 'my-new-list',
-        html: items.join('')
-      }).appendTo('#results');
-    } else {
-      $('<p>', { html: "No results found" }).appendTo('#results');
-    }
-  });
+  $('#results').empty();
+  if (items.length != 0) {
+    $('<p>', { html: "Search results:" }).appendTo('#results');
+    $('<ul/>', {
+      'class': 'my-new-list',
+      html: items.join('')
+    }).appendTo('#results');
+  } else {
+    $('<p>', { html: "No results found" }).appendTo('#results');
+  }
 
   var className = document.getElementById("results").className;
   if (className != "visible") {
     document.getElementById("results").className = "visible";
+  }
+}
+
+function getSearchResults(searchString) {
+  $.ajax({
+    async: false,
+    url: searchString, 
+    success: function(data) {
+      $.each(data, function(key, val) {
+        addSearchItem(val)
+      });
+    }
+  });
+}
+
+function addSearchItem(val) {
+  if (results.indexOf(val.display_name) < 0) {
+    results.push(val.display_name);
+    items.push(
+      "<li><a href='#' onclick='chooseAddr(" +
+      val.lat + ", " + val.lon + ", \"" + val.type + "\");return false;'>" + val.display_name +
+      '</a></li>'
+    );
   }
 }
 
@@ -71,7 +90,7 @@ function getLocation() {
 function setLocation(position) {
   var x = position.coords.latitude;
   var y = position.coords.longitude;
-  bb = "&viewbox=" + (y-1) + "," + (x+1) + "," + (y+1) + "," + (x-1);
+  bb = "&viewbox=" + (y-0.5) + "," + (x+0.5) + "," + (y+0.5) + "," + (x-0.5);
 }
 
 function chooseAddr(lat, lng, type) {
