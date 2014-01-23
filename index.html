@@ -17,7 +17,7 @@
     <script src='js/custom.js'></script>
   </head>
   <body onload="mapInit()">
-    <div class='top'>
+    <div class='header crow'>
       <a href="#">MapSearch</a>
       <span>
         <input type="text" placeholder="Search" name="addr" id="addr" onkeypress="change(event);"/>
@@ -25,15 +25,17 @@
       </span>
     </div>
 
-    <div id='bottom' class='bottom'>
-      <div id='map'></div>
+    <div id='bottom' class='body crow'>
+      <div class="map ccol">
+        <div id='map'></div>
+      </div>
 
-      <div id="search">
-        <div class="uppersearch">
+      <div class="results ccol">
+        <div class="title crow">
           <a href="#" onclick='closeSearch();'><span class="glyphicon glyphicon-remove"></a></span>
-          <span class="header">Search Results</span>
+          <span class="bigfont">Search Results</span>
         </div>
-        <div class="innersearch">
+        <div class="list crow scroll-y">
           <div id="results"></div>
         </div>
       </div>

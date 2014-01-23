@@ -1,24 +1,23 @@
-html, body
-{
-  height: 100%
-}
+/* Generic pane rules */
+body { margin: 0 }
+.crow, .ccol { overflow: hidden; position: absolute; }
+.crow { left: 0; right: 0; }
+.ccol { top: 0; bottom: 0; }
+.scroll-x { overflow-x: auto; }
+.scroll-y { overflow-y: auto; }
 
-body
-{
-  margin: 0;
-  padding: 0;
-}
+.header.crow { height: 60px; top: 0; }
+.body.crow { top: 60px; bottom: 0; }
 
-.top
+.header
 {
-  height: 8%;
   border-radius: 4px;
   border: 1px solid transparent;
   background-color: #f8f8f8;
   border-color: #e7e7e7;
 }
 
-.top a
+.header a
 {
   padding-top: 5px;
   padding-left: 20px;
@@ -26,7 +25,7 @@ body
   float: left;
 }
 
-.top span
+.header span
 {
   float: right;
   padding-top: 10px;
@@ -34,7 +33,7 @@ body
   width: 300px;
 }
 
-.top input
+.header input
 {
   height: 34px;
   width: 250px;
@@ -51,78 +50,26 @@ body
   transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
 }
 
-.navbar
-{
-  margin-bottom: 0;
-  height:5%
-}
+.map.ccol { left: 0; right: 0; }
+.results.ccol { width: 0; }
 
-.navbar-right
-{
-  padding-right: 50px;
-}
+.search .map.ccol { left: 0; right: 350px; }
+.search .results.ccol { width: 350px; right: 0; }
 
-.bottom
-{
-  height: 92%;
-  width: 100%;
-  margin: auto;
-}
+#map { height: 100%; }
 
-#map
-{
-  height: 100%;
-  display: inline-block;
-}
+.results.ccol .title { height: 60px; top 0; padding: 10px; }
+.results.ccol .list { top: 60px; bottom: 0; padding: 15px; }
 
-#search
+.title.crow .glyphicon
 {
-  display: inline;
   position: absolute;
-  height: 92%;
+  padding-top: 5px;
+  padding-left: 5px;
 }
 
-.uppersearch
+.bigfont
 {
-  padding: 10px;
-  height: 10%;
-}
-
-.uppersearch .header
-{
-  padding-left: 30px;
+  padding-left: 50px;
   font-size: 30px;
-}
-
-.uppersearch .glyphicon
-{
-  position: absolute;
-  padding-top: 10px;
-}
-
-.bottom #map
-{
-  width: 100%;
-}
-
-.bottom.search #map
-{
-  width: 75%;
-}
-
-.bottom #search
-{
-  width: 0%;
-}
-
-.bottom.search #search
-{
-  width: 25%;
-}
-
-.innersearch
-{
-  padding: 0px 20px;
-  height: 90%;
-  overflow: scroll;
 }

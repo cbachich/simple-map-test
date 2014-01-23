@@ -56,7 +56,7 @@ function addr_search() {
   console.log(text);
 
   document.getElementById('results').innerHTML = text;
-  document.getElementById('bottom').className = "bottom search";
+  document.getElementById('bottom').className = "body crow search";
 }
 
 function getSearchResults(searchString) {
@@ -129,5 +129,5 @@ function chooseAddr(lat, lng, type) {
 }
 
 function closeSearch() {
-  document.getElementById('bottom').className = "bottom";
+  document.getElementById('bottom').className = "body crow";
 }
