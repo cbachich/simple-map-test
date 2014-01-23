@@ -16,8 +16,12 @@ function mapInit() {
   getLocation();
 }
 
-function change() {
-  timeout = 2;
+function change(e) {
+  if (e.keyCode == 13) {
+    timeout = 1;
+  } else {
+    timeout = 5;
+  }
 }
 
 function timer() {
@@ -38,24 +42,20 @@ function addr_search() {
   items = [];
   results = [];
   var searchString = 'http://nominatim.openstreetmap.org/search?format=json&q=' + inp.value;
-  getSearchResults(searchString + bb + "&limit=5&bounded=1");
-  getSearchResults(searchString + "&limit=5");
+  getSearchResults(searchString + bb + "&limit=10&bounded=1");
+  getSearchResults(searchString + "&limit=10");
 
-  $('#results').empty();
+  var text;
   if (items.length != 0) {
-    $('<p>', { html: "Search results:" }).appendTo('#results');
-    $('<ul/>', {
-      'class': 'my-new-list',
-      html: items.join('')
-    }).appendTo('#results');
+    text = "<table class='table table-striped'>";
+    text += items.join('');
+    text += "</table>";
   } else {
-    $('<p>', { html: "No results found" }).appendTo('#results');
+    text = "No results found";
   }
+  console.log(text);
 
-  var className = document.getElementById("results").className;
-  if (className != "visible") {
-    document.getElementById("results").className = "visible";
-  }
+  document.getElementById('results').innerHTML = text;
 }
 
 function getSearchResults(searchString) {
@@ -74,9 +74,9 @@ function addSearchItem(val) {
   if (results.indexOf(val.display_name) < 0) {
     results.push(val.display_name);
     items.push(
-      "<li><a href='#' onclick='chooseAddr(" +
+      "<tr><td><a href='#' onclick='chooseAddr(" +
       val.lat + ", " + val.lon + ", \"" + val.type + "\");return false;'>" + val.display_name +
-      '</a></li>'
+      '</a></td></tr>'
     );
   }
 }
@@ -125,5 +125,4 @@ function chooseAddr(lat, lng, type) {
   ];
 
   map.markerLayer.setGeoJSON(geojson);
-  document.getElementById("results").className = "invisible";
 }
