@@ -56,6 +56,7 @@ function addr_search() {
   console.log(text);
 
   document.getElementById('results').innerHTML = text;
+  document.getElementById('bottom').className = "bottom search";
 }
 
 function getSearchResults(searchString) {
@@ -125,4 +126,8 @@ function chooseAddr(lat, lng, type) {
   ];
 
   map.markerLayer.setGeoJSON(geojson);
+}
+
+function closeSearch() {
+  document.getElementById('bottom').className = "bottom";
 }

@@ -71,21 +71,58 @@ body
 
 #map
 {
-  width: 75%;
   height: 100%;
   display: inline-block;
 }
 
 #search
 {
-  display: inline-block;
-  width: 24%;
+  display: inline;
   position: absolute;
   height: 92%;
-  overflow: scroll;
+}
+
+.uppersearch
+{
+  padding: 10px;
+  height: 10%;
+}
+
+.uppersearch .header
+{
+  padding-left: 30px;
+  font-size: 30px;
+}
+
+.uppersearch .glyphicon
+{
+  position: absolute;
+  padding-top: 10px;
+}
+
+.bottom #map
+{
+  width: 100%;
+}
+
+.bottom.search #map
+{
+  width: 75%;
+}
+
+.bottom #search
+{
+  width: 0%;
+}
+
+.bottom.search #search
+{
+  width: 25%;
 }
 
 .innersearch
 {
   padding: 0px 20px;
+  height: 90%;
+  overflow: scroll;
 }

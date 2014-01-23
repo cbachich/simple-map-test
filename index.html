@@ -25,12 +25,15 @@
       </span>
     </div>
 
-    <div class='bottom'>
+    <div id='bottom' class='bottom'>
       <div id='map'></div>
 
       <div id="search">
+        <div class="uppersearch">
+          <a href="#" onclick='closeSearch();'><span class="glyphicon glyphicon-remove"></a></span>
+          <span class="header">Search Results</span>
+        </div>
         <div class="innersearch">
-          <h2>Search Results</h2>
           <div id="results"></div>
         </div>
       </div>
